@@ -36,7 +36,7 @@ extensions = {
     "pdf": DOCUMENTS
 }
 
-path = "/home/koss/Motlox"
+path = input("Input your path to files: ")
 
             
 CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"
