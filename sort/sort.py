@@ -1,23 +1,23 @@
-import os
-import sys
-# from pathlib import Path
+# import os
+# import sys
+# # from pathlib import Path
 
 
 
-# for currentpath, folders, files in os.walk('.'):
-#     print(currentpath, folders, files)
+# # for currentpath, folders, files in os.walk('.'):
+# #     print(currentpath, folders, files)
 
 
-# path1 = os.getcwd()
-# print(path1)
+# # path1 = os.getcwd()
+# # print(path1)
 
 
 
-dir_name = '/home/koss/Motlox'
-# Get list of all files in a given directory sorted by name
-list_of_files = sorted(filter(lambda x: os.path.isfile(os.path.join(dir_name, x)), os.listdir(dir_name)))
-for file_name in list_of_files:
-    print(file_name)
+# dir_name = '/home/koss/Motlox'
+# # Get list of all files in a given directory sorted by name
+# list_of_files = sorted(filter(lambda x: os.path.isfile(os.path.join(dir_name, x)), os.listdir(dir_name)))
+# for file_name in list_of_files:
+#     print(file_name)
 
 
 
@@ -50,5 +50,15 @@ for file_name in list_of_files:
 # #         print(os.path.join(currentpath, file))   
 
 
+# for extension, folder_name in extensions.items():
+#     files = glob.glob(os.path.join(path, f"*.{extension}"))
+#     print(f"[*] Найдено {len(files)} файлов с расширением {extension}.")
+#     if not os.path.isdir(os.path.join(path, folder_name)) and files:
+#         os.mkdir(os.path.join(path, folder_name))
+#         print(f"[+] Создана папка {folder_name}.")
 
-
+#     for file_f in files:
+#         basename = os.path.basename(file_f)
+#         dst = os.path.join(path, folder_name, basename)
+#         print(f"[*] Перенесен файл {file_f} в {dst}")
+#         shutil.move(file_f, dst)

@@ -1,57 +1,82 @@
 import os
-import glob
 import shutil
+import re
+
+
+MUSIC = "music"
+ARCHIVES = "archives"
+IMAGE = "image"
+VIDEO = "video"
+DOCUMENTS = "documents"
+UNKNOWN = 'unknown'
 
 
 extensions = {
-    "ogg": "music",
-    "wav": "music",
-    "amr": "music",
-    "mp3": "music",
-    "zip": "archives",
-    "tar": "archives",
-    "gz": "archives",
-    "png": "image",
-    "jpeg": "image",
-    "svg": "image",
-    "jpg": "image",
-    "mov": "video",
-    "avi": "video",
-    "mkv": "video",
-    "mp4": "video",
-    "doc": "documents",
-    "gnp": "documents",
-    "pptx": "documents",
-    "xlsx": "documents",
-    "txt": "documents",
-    "docx": "documents",
-    "png": "image"
+    "ogg": MUSIC,
+    "wav": MUSIC,
+    "amr": MUSIC,
+    "mp3": MUSIC,
+    "zip": ARCHIVES,
+    "tar": ARCHIVES,
+    "gz": ARCHIVES,
+    "png": IMAGE,
+    "jpeg": IMAGE,
+    "svg": IMAGE,
+    "jpg": IMAGE,
+    "mov": VIDEO,
+    "avi": VIDEO,
+    "mkv": VIDEO,
+    "mp4": VIDEO,
+    "doc": DOCUMENTS,
+    "gnp": DOCUMENTS,
+    "pptx": DOCUMENTS,
+    "xlsx": DOCUMENTS,
+    "txt": DOCUMENTS,
+    "docx": DOCUMENTS,
+    "pdf": DOCUMENTS
 }
 
 path = "/home/koss/Motlox"
 
+            
+CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"
+TRANSLATION = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r",
+               "s", "t", "u", "f", "h", "ts", "ch", "sh", "sch", "", "y", "", "e", "yu", "ya", "je", "i", "ji", "g")
 
-for extension, folder_name in extensions.items():
-    files = glob.glob(os.path.join(path, f"*.{extension}"))
-    print(f"[*] Найдено {len(files)} файлов с расширением {extension}.")
-    if not os.path.isdir(os.path.join(path, folder_name)) and files:
-        os.mkdir(os.path.join(path, folder_name))
-        print(f"[+] Создана папка {folder_name}.")
+TRANS = {}
+
+for c, l in zip(CYRILLIC_SYMBOLS, TRANSLATION):
+    TRANS[ord(c)] = l
+    TRANS[ord(c.upper())] = l.upper()
+
+
+def normalize(file_name):
+    m = re.match(r"^(.+)\.([\w\d]{2,4})$", file_name)
+    file_name = m.group(1)
+    extension = m.group(2)
+    
+
+    translated_name = ""
+
+    for let in file_name:
+        if TRANS.get(ord(let)):
+            translated_name += TRANS[ord(let)]
+        else:
+            translated_name += let
+    translated_name = re.sub(r"[^\w\d]", "_", translated_name)
+    return f"{translated_name}.{extension}"
+
+    
+            
+ 
+files = os.listdir(path)
+print(files)
+for file_item in files:
+    if not os.path.isdir(file_item):
+        extension = re.match(r".+\.([\w\d]{2,4})$", file_item)
+        if extension:
+            target_path = extensions.get(extension.group(1), UNKNOWN)
+            shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
         
-    for file in files:
-        basename = os.path.basename(file)
-        dst = os.path.join(path, folder_name, basename)
-        print(f"[*] Перенесен файл {file} в {dst}")
-        shutil.move(file, dst)
-        
-        
 
 
-
-
-# ./music[] ['file2.ogg', 'file3.wav', 'file4.amr', 'file1.mp3']
-# ./archives[] ['file1.zip', 'file3.tar', 'file2.gz']
-# ./image[] ['file2.png', 'file1.jpeg', 'file4.svg', 'file3.jpg']
-# ./video[] ['file3.mov', 'file1.avi', 'file4.mkv', 'file2.mp4']
-# ./documents[] ['file1.doc', 'file4.pdf', 'file6.pptx', 'file5.xlsx', 'file3.txt', 'file2.docx']
-# ./unknown [] ['file4.gvc', 'file2.gnp', 'file1.gepj', 'file3.gpj']
