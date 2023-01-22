@@ -8,7 +8,7 @@ ARCHIVES = "archives"
 IMAGE = "image"
 VIDEO = "video"
 DOCUMENTS = "documents"
-UNKNOWN = 'unknown'
+UNKNOWN = "unknown"
 
 
 extensions = {
