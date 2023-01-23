@@ -3,6 +3,15 @@ import shutil
 import re
 
 
+path = input("Enter your path: ")
+
+folders = ['images', 'videos', 'documents',
+           'music', 'archives', 'unknown']
+for folder in folders:
+    full_path = os.path.join(path, folder)
+if not os.path.exists(full_path):
+    os.mkdir(full_path)
+
 MUSIC = "music"
 ARCHIVES = "archives"
 IMAGE = "image"
@@ -35,8 +44,6 @@ extensions = {
     "docx": DOCUMENTS,
     "pdf": DOCUMENTS
 }
-
-path = input("Input your path to files: ")
 
             
 CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"
@@ -77,6 +84,6 @@ for file_item in files:
         if extension:
             target_path = extensions.get(extension.group(1), UNKNOWN)
             shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
-        
+            
 
-
+# /home/koss/test
