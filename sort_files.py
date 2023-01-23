@@ -4,13 +4,12 @@ import re
 
 
 path = input("Enter your path: ")
-
-folders = ['images', 'videos', 'documents',
-           'music', 'archives', 'unknown']
-for folder in folders:
-    full_path = os.path.join(path, folder)
-if not os.path.exists(full_path):
-    os.mkdir(full_path)
+folder_name = ['images', 'videos', 'documents',
+               'music', 'archives', 'unknown']
+for folder in folder_name:
+    print(os.path.join(path, folder))
+    if not os.path.exists(os.path.join(path, folder)):
+        os.makedirs(os.path.join(path, folder))
 
 MUSIC = "music"
 ARCHIVES = "archives"
