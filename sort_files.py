@@ -86,4 +86,3 @@ for file_item in files:
             shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
             
 
-# /home/koss/test
