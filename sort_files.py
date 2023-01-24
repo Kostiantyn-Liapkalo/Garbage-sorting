@@ -4,6 +4,7 @@ import re
 
 
 path = input("Enter your path: ")
+
 folder_name = ['images', 'videos', 'documents',
                'music', 'archives', 'unknown']
 for folder in folder_name:
@@ -13,8 +14,8 @@ for folder in folder_name:
 
 MUSIC = "music"
 ARCHIVES = "archives"
-IMAGE = "image"
-VIDEO = "video"
+IMAGES = "images"
+VIDEOS = "videos"
 DOCUMENTS = "documents"
 UNKNOWN = "unknown"
 
@@ -27,14 +28,14 @@ extensions = {
     "zip": ARCHIVES,
     "tar": ARCHIVES,
     "gz": ARCHIVES,
-    "png": IMAGE,
-    "jpeg": IMAGE,
-    "svg": IMAGE,
-    "jpg": IMAGE,
-    "mov": VIDEO,
-    "avi": VIDEO,
-    "mkv": VIDEO,
-    "mp4": VIDEO,
+    "png": IMAGES,
+    "jpeg": IMAGES,
+    "svg": IMAGES,
+    "jpg": IMAGES,
+    "mov": VIDEOS,
+    "avi": VIDEOS,
+    "mkv": VIDEOS,
+    "mp4": VIDEOS,
     "doc": DOCUMENTS,
     "gnp": DOCUMENTS,
     "pptx": DOCUMENTS,
