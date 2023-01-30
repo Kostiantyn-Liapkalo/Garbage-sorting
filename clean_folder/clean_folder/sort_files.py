@@ -81,7 +81,7 @@ def normalize(file_name):
 
     
             
-def sort_folder(): 
+def sort_folder(path): 
     files = os.listdir(path)
     print(files)
     for file_item in files:
