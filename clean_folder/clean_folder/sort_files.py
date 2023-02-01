@@ -81,24 +81,22 @@ def normalize(file_name):
 
     
             
-
-files = os.listdir(path)
-print(files)
-for file_item in files:
-    if not os.path.isdir(file_item):
-        extension = re.match(r".+\.([\w\d]{2,4})$", file_item)
-        if extension:
-            target_path = extensions.get(extension.group(1), UNKNOWN)
-            shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
-
-
-# def main():
-#  pass
+def sort_folders():
+    files = os.listdir(path)
+    print(files)
+    for file_item in files:
+        if not os.path.isdir(file_item):
+            extension = re.match(r".+\.([\w\d]{2,4})$", file_item)
+            if extension:
+                target_path = extensions.get(extension.group(1), UNKNOWN)
+                shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
 
 
-# if __name__ == '__main__':
-#     main()
-#     create_folder()
-#     normalize()
-#     sort_folder()
+def main():
+    normalize()
+    sort_folders()
+
+
+if __name__ == '__main__':
+    main()
 
