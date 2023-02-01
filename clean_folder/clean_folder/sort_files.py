@@ -2,20 +2,20 @@ import os
 import shutil
 import re
 import glob
+import sys
 
 
-def create_folder():
-    path = input("Enter your path: ")
-    
-    folder_name = ['images', 'videos', 'documents',
-                   'music', 'archives', 'unknown']
-    for folder in folder_name:
-        print(os.path.join(path, folder))
-        if not os.path.exists(os.path.join(path, folder)):
-            os.makedirs(os.path.join(path, folder))
-    
-    for path in glob.glob(path, recursive=True):
-        print(path)
+path = sys.argv[1] if len(sys.argv) > 1 else '.'
+
+folder_name = ['images', 'videos', 'documents',
+               'music', 'archives', 'unknown']
+for folder in folder_name:
+    print(os.path.join(path, folder))
+    if not os.path.exists(os.path.join(path, folder)):
+        os.makedirs(os.path.join(path, folder))
+
+for path in glob.glob(path, recursive=True):
+    print(path)
 
 
 MUSIC = "music"
@@ -81,14 +81,24 @@ def normalize(file_name):
 
     
             
-def sort_folder(path): 
-    files = os.listdir(path)
-    print(files)
-    for file_item in files:
-        if not os.path.isdir(file_item):
-            extension = re.match(r".+\.([\w\d]{2,4})$", file_item)
-            if extension:
-                target_path = extensions.get(extension.group(1), UNKNOWN)
-                shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
-            
+
+files = os.listdir(path)
+print(files)
+for file_item in files:
+    if not os.path.isdir(file_item):
+        extension = re.match(r".+\.([\w\d]{2,4})$", file_item)
+        if extension:
+            target_path = extensions.get(extension.group(1), UNKNOWN)
+            shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
+
+
+# def main():
+#  pass
+
+
+# if __name__ == '__main__':
+#     main()
+#     create_folder()
+#     normalize()
+#     sort_folder()
 
