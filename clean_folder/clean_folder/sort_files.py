@@ -92,11 +92,11 @@ def sort_folders():
                 shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
 
 
-def main():
-    normalize()
-    sort_folders()
+# def main():
+#     normalize()
+#     sort_folders()
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
 
