@@ -90,3 +90,13 @@ def sort_folders():
             if extension:
                 target_path = extensions.get(extension.group(1), UNKNOWN)
                 shutil.move(os.path.join(path, file_item), os.path.join(path, f"{target_path}/{normalize(file_item)}"))       
+
+
+def main():
+    normalize()
+    sort_folders()
+
+
+if __name__ == '__main__':
+    main()
+
