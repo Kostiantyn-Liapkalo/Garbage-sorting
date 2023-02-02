@@ -1,6 +1,9 @@
-# Garbage-sorting
-step#1  =>  git clone
-step#2  =>  open folder in your IDE
-step#3  =>  cd Motlox
-step#4  =>  run script
+
+git clone https://github.com/Kostiantyn-Liapkalo/Garbage-sorting.git
+
+cd Garbage-sorting/clean_folder/clean_folder
+
+#Run in terminal (Motlox is folder for sorting)
+
+python3 sort_files.py Motlox
 
